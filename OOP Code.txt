@@ -1,0 +1,744 @@
+Code: 
+ 
+package OOP;  
+ 
+import java.util.Scanner; 
+ 
+class Student {  
+    int rollno; 
+    String name; 
+     
+    void getdata() { 
+        Scanner input = new Scanner(System.in); 
+        System.out.print("Enter Roll no: "); 
+        rollno = input.nextInt(); 
+        input.nextLine(); //clear the buAer 
+        System.out.print("Enter Name: "); 
+        name = input.nextLine(); 
+    } 
+     
+    void display() { 
+        System.out.println(rollno + ". " + name); 
+    } 
+} 
+ 
+public class Prac1 { 
+    public static void main(String[] args) { 
+        // Creating multiple objects  
+        Student s1 = new Student(); 
+        Student s2 = new Student(); 
+        Student s3 = new Student(); 
+        
+        System.out.println("Enter the details of the first student: "); 
+        s1.getdata(); 
+        System.out.println("Enter the details of the second student: "); 
+        s2.getdata(); 
+        System.out.println("Enter the details of the third student: "); 
+        s3.getdata();    
+        
+        System.out.println("\n--- Student Details ---"); 
+        s1.display(); 
+        s2.display(); 
+        s3.display(); 
+    } 
+} 
+ 
+Output: 
+Enter the details of the first student:  
+Enter Roll no: 9 
+Enter Name: Rahul 
+Enter the details of the second student:  
+Enter Roll no: 18 
+Enter Name: Rey 
+Enter the details of the third student:  
+Enter Roll no: 27 
+Enter Name: Rita --- Student Details --- 
+9. Rahul 
+18. Rey 
+27. Rita 
+Code:  
+package OOP; 
+ 
+class Student1 { 
+    String name; 
+    int age; 
+    int total_marks; 
+    long mobile_no; 
+    float percentage; 
+ 
+    Student1() { 
+        System.out.println("The Default Constructor:"); 
+        name = "Unknown"; 
+        age = 0; 
+        total_marks = 0; 
+        mobile_no = 0; 
+        percentage = 0.0f; 
+    } 
+ 
+    Student1(String n, int a, int tm, long mn, float p) { 
+        System.out.println("The Parameterized Constructor:"); 
+        name = n; 
+        age = a; 
+        total_marks = tm; 
+        mobile_no = mn; 
+        percentage = p; 
+    } 
+ 
+    Student1(Student1 obj) { 
+        System.out.println("The Copy Constructor:"); 
+        name = obj.name; 
+        age = obj.age; 
+        total_marks = obj.total_marks; 
+        mobile_no = obj.mobile_no; 
+        percentage = obj.percentage; 
+    } 
+ 
+    void display() { 
+        System.out.println("Student Name: " + name); 
+        System.out.println("Student Age: " + age); 
+        System.out.println("Total Marks: " + total_marks); 
+        System.out.println("Mobile Number: " + mobile_no); 
+        System.out.println("Percentage: " + percentage + "%\n"); 
+    } 
+} 
+ 
+public class Prac2final { 
+    public static void main(String[] args) { 
+        Student1 s1 = new Student1(); 
+        s1.display(); 
+        Student1 s2 = new Student1("Yash", 21, 450, 987654321L, 90.5f); 
+        s2.display(); 
+        Student1 s3 = new Student1(s2); 
+        s3.display(); 
+    } 
+} 
+ 
+ 
+Output: 
+The Default Constructor: 
+Student Name: Unknown 
+Student Age: 0 
+Total Marks: 0 
+Mobile Number: 0 
+Percentage: 0.0% 
+ 
+The Parameterized Constructor: 
+Student Name: Yash 
+Student Age: 21 
+Total Marks: 450 
+Mobile Number: 987654321 
+Percentage: 90.5% 
+ 
+The Copy Constructor: 
+Student Name: Yash 
+Student Age: 21 
+Total Marks: 450 
+Mobile Number: 987654321 
+Percentage: 90.5%
+Code:  
+class Student1 { 
+ 
+    private String name; 
+    private int age; 
+    private int total_marks; 
+    private long mobile_no; 
+    private float percentage; 
+ 
+    public void setName(String name) { 
+        this.name = name; 
+    } 
+    public String getName() { 
+        return name; 
+    } 
+ 
+    public void setAge(int age) { 
+        this.age = age; 
+    } 
+    public int getAge() { 
+        return age; 
+    } 
+ 
+    public void setTotalMarks(int total_marks) { 
+        this.total_marks = total_marks; 
+    } 
+    public int getTotalMarks() { 
+        return total_marks; 
+    } 
+ 
+    public void setMobileNo(long mobile_no) { 
+        this.mobile_no = mobile_no; 
+    } 
+    public long getMobileNo() { 
+        return mobile_no; 
+    } 
+ 
+    public void setPercentage(float percentage) { 
+        this.percentage = percentage; 
+    } 
+    public float getPercentage() { 
+        return percentage; 
+    } 
+} 
+ 
+public class Prac3 { 
+    public static void main(String[] args) { 
+ 
+        Student1 s1 = new Student1(); 
+ 
+        s1.setName("Yash"); 
+        s1.setAge(21); 
+        s1.setTotalMarks(450); 
+        s1.setMobileNo(9876543210L);  
+        s1.setPercentage(90.5f); 
+ 
+        System.out.println("Testing Controlled Access:\n"); 
+        System.out.println("Student Name: " + s1.getName()); 
+        System.out.println("Student Age: " + s1.getAge()); 
+        System.out.println("Total Marks: " + s1.getTotalMarks()); 
+        System.out.println("Mobile Number: " + s1.getMobileNo()); 
+        System.out.println("Percentage: " + s1.getPercentage() + "%"); 
+    } 
+} 
+ 
+Output: 
+Testing Controlled Access: 
+ 
+Student Name: Yash 
+Student Age: 21 
+Total Marks: 450 
+Mobile Number: 9876543210 
+Percentage: 90.5%
+CODE: 
+package sybtech; 
+ 
+public class Prac4 { 
+  
+ public int calculateArea(int side) { 
+  System.out.println("Invoking calculateArea(int)"); 
+  return side*side; 
+ } 
+  
+ public int calculateArea(int length, int breadth) { 
+  System.out.println("\nInvoking calculateArea(int,int)"); 
+  return length * breadth; 
+ } 
+  
+ public double calculateArea(double radius) { 
+  System.out.println("\nInvoking calculateArea(double)"); 
+  return Math.PI * radius * radius; 
+ } 
+  
+ public double calculateArea(double base, int height) { 
+  System.out.println("\nInvoking calculateArea(double, int)"); 
+  return 0.5 * base * height; 
+ } 
+  
+ public double calculateArea(int base, double height) { 
+  System.out.println("\nInvoking calcuateArea(int, double)"); 
+  return base * height; 
+ } 
+  
+ 
+ public static void main(String[] args) { 
+  Prac4 calc = new Prac4(); 
+   
+  System.out.println("Square Area:" + calc.calculateArea(5)); 
+  System.out.println("Rectangle Area:" + calc.calculateArea(5,10)); 
+  System.out.println("Circle Area:" + String.format("%.2f", 
+calc.calculateArea(4.5))); 
+  System.out.println("Triangle Area:" + calc.calculateArea(6.0,4)); 
+  System.out.println("Parallelogram Area:" + calc.calculateArea(6,4.5)); 
+   
+ } 
+} 
+ 
+OUTPUT: 
+Invoking calculateArea(int) 
+Square Area:25 
+Invoking calculateArea(int,int) 
+Rectangle Area:50 
+Invoking calculateArea(double) 
+Circle Area:63.62 
+Invoking calculateArea(double. int) 
+Triangle Area:12.0 
+Invoking calcuateArea(int, double) 
+Parallelogram Area:27.0 
+CODE: 
+package sybtech; 
+ 
+abstract class Shape { 
+  
+ public abstract  double calculateArea(); 
+  
+ public void display() { 
+  System.out.println("Calculating area for the shape"); 
+ } 
+} 
+ 
+class Circle extends Shape { 
+ private double radius; 
+  
+ public Circle(double radius) { 
+   this.radius = radius; 
+ 
+  } 
+   
+  @Override  
+  public double calculateArea() { 
+   return Math.PI * radius * radius ; 
+  } 
+ } 
+ 
+class Rectangle extends Shape { 
+ private double length; 
+ private double breadth; 
+  
+ public Rectangle (double length, double breadth) { 
+  this.length = length; 
+  this.breadth = breadth; 
+   
+ } 
+  
+ @Override  
+ public double calculateArea () { 
+  return length * breadth; 
+ } 
+} 
+public class Prac5 { 
+public static void main (String [] args ) { 
+Shape c1 = new Circle (5.0); 
+Shape r1 = new Rectangle (4.0,6.0); 
+System.out.println("Circle"); 
+c1.display(); 
+System.out.println("Area:  " + String.format("%.2f", c1.calculateArea())); 
+System.out.println("\nRectangle"); 
+r1.display(); 
+System.out.println("Area: " + String.format("%.2f", r1.calculateArea())); 
+} 
+} 
+OUTPUT: 
+Circle 
+Calculating area for the shape 
+Area:  78.54 
+Rectangle 
+Calculating area for the shape 
+Area: 24.00 
+CODE: 
+package sybtech; 
+class Person { 
+protected String name; 
+protected int age; 
+protected String address; 
+public Person(String name, int age, String address) { 
+this.name = name; 
+this.age = age; 
+this.address = address; 
+} 
+public void displayPersonalDetails() { 
+System.out.println("Name: " + name); 
+System.out.println("Age: " + age); 
+System.out.println("Address: " + address); 
+} 
+} 
+class Student extends Person { 
+private String studentID; 
+private String major; 
+private double cgpa; 
+public Student(String name, int age, String address, String studentID, String major, double 
+cgpa) { 
+super(name, age, address); 
+this.studentID = studentID; 
+this.major = major; 
+  this.cgpa = cgpa; 
+ } 
+  
+ public void displayDetails() { 
+  System.out.println("Student Details"); 
+  super.displayPersonalDetails(); 
+  System.out.println("Student ID: " + studentID); 
+  System.out.println("Major: " + major); 
+  System.out.println("CGPA: " + cgpa); 
+ } 
+} 
+ 
+class Teacher extends Person { 
+ private String employeeID; 
+ private String subject; 
+ private double salary; 
+  
+ public Teacher(String name, int age, String address, String employeeID, String subject, double 
+salary) { 
+  super (name, age , address); 
+  this.employeeID = employeeID; 
+  this.subject = subject; 
+  this.salary = salary; 
+ } 
+  
+ public void displayDetails() { 
+  System.out.println("\nTeacher Details"); 
+  super.displayPersonalDetails(); 
+  System.out.println("Employee ID: " + employeeID); 
+  System.out.println("Subject taught: " + subject); 
+  System.out.println("Salary: Rs." + salary); 
+} 
+} 
+public class Prac6 { 
+public static void main (String [] args) { 
+Student s1 =  new Student ("Nick Gur", 20, "6th Avenue", "S1001", "CS", 3.8); 
+Teacher t1 = new Teacher ("Moe Lester", 38, "51 Street", "T1025", "Mathematics", 
+65000.00); 
+} 
+} 
+OUTPUT: 
+s1.displayDetails(); 
+t1.displayDetails(); 
+Student Details 
+Name: Nick Gur 
+Age: 20 
+Address: 6th Avenue 
+Student ID: S1001 
+Major: CS 
+CGPA: 3.8 
+Teacher Details 
+Name: Moe Lester 
+Age: 38 
+Address: 51 Street 
+Employee ID: T1025 
+Subject taught: Mathematics 
+Salary: Rs.65000.0 
+CODE: 
+package sybtech; 
+ 
+class Employee { 
+ protected String name; 
+ protected String employeeID; 
+  
+ public Employee(String name, String employeeID) { 
+  this.name = name; 
+  this.employeeID = employeeID; 
+ } 
+ public double calculateSalary() { 
+  System.out.println("Calculating employee salary..."); 
+  return 0.0; 
+ } 
+ public void displayDetails() { 
+  System.out.println("Name: " + name); 
+  System.out.println("EmployeeID: " + employeeID); 
+ } 
+} 
+ 
+class PermanentEmployee extends Employee { 
+ private double basicSalary; 
+ private double allowances; 
+  
+ public PermanentEmployee(String name, String employeeID, double basicSalary, double 
+allowances) { 
+  super(name, employeeID); 
+  this.basicSalary = basicSalary; 
+  this.allowances = allowances; 
+ } 
+  
+ @Override  
+ public double calculateSalary() { 
+  return basicSalary + allowances; 
+   
+ } 
+ @Override  
+ public void displayDetails() { 
+  System.out.println("\nPermanent Employee"); 
+  super.displayDetails(); 
+ } 
+} 
+ 
+class ContractEmployee extends Employee { 
+ private double hourlyRate; 
+ private int hoursWorked; 
+  
+ public ContractEmployee(String name, String employeeID, double hourlyRate, int 
+hoursWorked) { 
+  super(name, employeeID); 
+  this.hourlyRate = hourlyRate; 
+  this.hoursWorked = hoursWorked; 
+ } 
+ 
+@Override 
+public double calculateSalary() { 
+    return hourlyRate * hoursWorked; 
+} 
+ 
+@Override 
+public void displayDetails() { 
+    System.out.println("\nContract Employee"); 
+    super.displayDetails(); 
+} 
+ 
+} 
+public class Prac7 { 
+  
+public static void main(String[] args) { 
+     
+    Employee emp1 = new PermanentEmployee("Alder Lake", "PE-405", 60000.0, 15000.0); 
+    Employee emp2 = new ContractEmployee("Rajesh", "CE-902", 800.0, 120); 
+ 
+    emp1.displayDetails(); 
+    System.out.println("Total Salary: Rs." + emp1.calculateSalary());  
+ 
+    emp2.displayDetails(); 
+    System.out.println("Total Salary: Rs." + emp2.calculateSalary());  
+} 
+} 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+OUTPUT: 
+Permanent Employee 
+Name: Alder Lake 
+EmployeeID: PE-405 
+Total Salary: Rs.75000.0 
+Contract Employee 
+Name: Rajesh 
+EmployeeID: CE-902 
+Total Salary: Rs.96000.0 
+CODE: 
+package sybtech; 
+interface Drawable { 
+void draw(); 
+} 
+interface Resizable { 
+void resize(int percentage); 
+} 
+class Circle8 implements Drawable { 
+private int radius; 
+public Circle8 (int radius) { 
+this.radius = radius; 
+} 
+@Override 
+public void draw() { 
+System.out.println("Drawing a circle with radius: " + radius); 
+} 
+} 
+class Rectangle8 implements Drawable, Resizable { 
+private double length; 
+private double breadth; 
+public Rectangle8 (double length, double breadth) { 
+this.length = length; 
+this.breadth = breadth; 
+} 
+  
+ @Override 
+ public void draw () { 
+  System.out.println("Drawing a rectangle [Length: " + length + ", Breadth: " + breadth + 
+"]"); 
+ } 
+ 
+    @Override 
+    public void resize(int percentage) { 
+        System.out.println("Resizing Rectangle by " + percentage + "%..."); 
+        length = length + (length * percentage / 100.0); 
+        breadth = breadth + (breadth * percentage / 100.0); 
+    } 
+} 
+ 
+public class Prac8 { 
+  
+    public static void main(String[] args) { 
+         
+        System.out.println("--- Single Interface Implementation ---"); 
+        Circle8 myCircle = new Circle8(5); 
+        myCircle.draw(); 
+         
+        System.out.println("\n--- Multiple Inheritance via Interfaces ---"); 
+        Rectangle8 myRect = new Rectangle8(10.0, 20.0); 
+         
+        myRect.draw();  
+        myRect.resize(50);  
+        myRect.draw();  
+    } 
+} 
+OUTPUT: --- Single Interface Implementation --- 
+Drawing a circle with radius: 5 --- Multiple Inheritance via Interfaces --- 
+Drawing a rectangle [Length: 10.0, Breadth: 20.0] 
+Resizing Rectangle by 50%... 
+Drawing a rectangle [Length: 15.0, Breadth: 30.0] 
+CODE 1: (librarypkg) 
+package librarypkg; 
+ 
+class Book { 
+    String title; 
+    String author; 
+    String isbn; 
+ 
+    public Book(String title, String author, String isbn) { 
+        this.title = title; 
+        this.author = author; 
+        this.isbn = isbn; 
+    } 
+ 
+    public void displayBookDetails() { 
+        System.out.println("Book Title: " + title); 
+        System.out.println("Author: " + author); 
+        System.out.println("ISBN: " + isbn); 
+    } 
+} 
+ 
+class Member { 
+    String name; 
+    String memberId; 
+ 
+    public Member(String name, String memberId) { 
+        this.name = name; 
+        this.memberId = memberId; 
+    } 
+ 
+    public void displayMemberDetails() { 
+        System.out.println("Member Name: " + name); 
+        System.out.println("Member ID: " + memberId); 
+    } 
+} 
+ 
+public class Library { 
+    private String libraryName; 
+ 
+    public Library(String libraryName) { 
+        this.libraryName = libraryName; 
+    } 
+ 
+    public void issueBook(String title, String author, String isbn, String memberName, String memberId) 
+{ 
+        Book book = new Book(title, author, isbn); 
+        Member member = new Member(memberName, memberId); 
+ 
+        System.out.println("--- " + libraryName + " Transaction ---"); 
+        System.out.println("Issuing '" + book.title + "' to " + member.name + ".\n"); 
+        book.displayBookDetails(); 
+        System.out.println(); 
+        member.displayMemberDetails(); 
+    } 
+} 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+CODE 2: (sybtech) 
+package sybtech; 
+import librarypkg.Library; 
+public class Prac9 { 
+public static void main(String[] args) { 
+Library lib = new Library("Central College Library"); 
+lib.issueBook("EAective Java", "Joshua Bloch", "978-0134685991", "Rahul Sharma", "MEM-204"); 
+} 
+} 
+OUTPUT: --- Central College Library Transaction --- 
+Issuing 'EAective Java' to Rahul Sharma. 
+Book Title: EAective Java 
+Author: Joshua Bloch 
+ISBN: 978-0134685991 
+Member Name: Rahul Sharma 
+Member ID: MEM-204 
+CODE: 
+package sybtech; 
+ 
+class InsuAicientBalanceException extends Exception { 
+    public InsuAicientBalanceException(String message) { 
+        super(message); 
+    } 
+} 
+ 
+class InvalidTransactionException extends Exception { 
+    public InvalidTransactionException(String message) { 
+        super(message); 
+    } 
+} 
+ 
+class BankAccount { 
+    private String accountHolder; 
+    private double balance; 
+ 
+    public BankAccount(String accountHolder, double initialBalance) { 
+        this.accountHolder = accountHolder; 
+        this.balance = initialBalance; 
+    } 
+ 
+    public void deposit(double amount) throws InvalidTransactionException { 
+        if (amount <= 0) { 
+            throw new InvalidTransactionException("Deposit amount must be greater than zero."); 
+        } 
+        balance += amount; 
+        System.out.println("Successfully deposited: Rs." + amount); 
+        System.out.println("Updated Balance: Rs." + balance); 
+    } 
+ 
+    public void withdraw(double amount) throws InvalidTransactionException, 
+InsuAicientBalanceException { 
+        if (amount <= 0) { 
+            throw new InvalidTransactionException("Withdrawal amount must be greater than zero."); 
+        } 
+        if (amount > balance) { 
+            throw new InsuAicientBalanceException("InsuAicient funds! Available balance: Rs." + balance); 
+        } 
+        balance -= amount; 
+        System.out.println("Successfully withdrew: Rs." + amount); 
+        System.out.println("Remaining Balance: Rs." + balance); 
+    } 
+} 
+ 
+public class Prac10 { 
+    public static void main(String[] args) { 
+        BankAccount account = new BankAccount("Rohan Verma", 5000.0); 
+ 
+        System.out.println("--- Transaction 1: Valid Deposit ---"); 
+        try { 
+            account.deposit(2000.0); 
+        } catch (InvalidTransactionException e) { 
+            System.out.println("Transaction Error: " + e.getMessage()); 
+        } finally { 
+            System.out.println("Transaction 1 process completed.\n"); 
+        } 
+ 
+        System.out.println("--- Transaction 2: InsuAicient Balance ---"); 
+        try { 
+            account.withdraw(10000.0); 
+        } catch (InsuAicientBalanceException | InvalidTransactionException e) { 
+            System.out.println("Transaction Error: " + e.getMessage()); 
+        } finally { 
+            System.out.println("Transaction 2 process completed.\n"); 
+        } 
+ 
+        System.out.println("--- Transaction 3: Invalid Amount ---"); 
+        try { 
+            account.deposit(-500.0); 
+        } catch (InvalidTransactionException e) { 
+            System.out.println("Transaction Error: " + e.getMessage()); 
+        } finally { 
+            System.out.println("Transaction 3 process completed."); 
+        } 
+    } 
+} 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+OUTPUT: --- Transaction 1: Valid Deposit --- 
+Successfully deposited: Rs.2000.0 
+Updated Balance: Rs.7000.0 
+Transaction 1 process completed. --- Transaction 2: InsuAicient Balance --- 
+Transaction Error: InsuAicient funds! Available balance: Rs.7000.0 
+Transaction 2 process completed. --- Transaction 3: Invalid Amount --- 
+Transaction Error: Deposit amount must be greater than zero. 
+Transaction 3 process completed. 

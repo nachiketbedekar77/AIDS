@@ -1,0 +1,1187 @@
+Name: Rishi Gupta
+LDS - Lab Assignment I: A college library maintains a list of book IDs in sorted order. Write a C++ program to implement Binary Search to determine whether a given book ID exists in the list and display the number of comparisons required during the search.
+
+CODE:
+#include <iostream>
+using namespace std;
+
+int main() {
+    int bookid[] = {101, 102, 103, 104, 105, 106, 107};
+    int size = sizeof(bookid) / sizeof(bookid[0]);
+    bool found = false;
+    
+    int low = 0;
+    int high = size - 1;
+    int mid;
+    int n = 0;
+    int target;
+
+    cout << "Enter Book ID to search: ";
+    cin >> target;
+
+    while (low <= high) {
+        mid = low + (high - low) / 2;
+        n++;
+
+        if (bookid[mid] == target) {
+            found = true;
+            break;
+        }
+        else if (bookid[mid] < target) {
+            low = mid + 1;
+        }
+        else {
+            high = mid - 1;
+        }
+    }
+
+    if (found) {
+        cout << "Book ID " << target << " found at index " << mid << ".\n";
+        cout << "Total comparisons required: " << n << endl;
+    }
+    else {
+        cout << "Book ID " << target << " was not found.\n";
+    }
+
+    return 0;
+}
+
+
+OUTPUT:
+Enter Book ID to search: 100
+Book ID 100 was not found.
+
+Enter Book ID to search: 103
+Book ID 103 found at index 2.
+Total comparisons required: 3
+
+ Name: Rishi Gupta
+LDS Lab Assignment 2: A teacher wants to prepare a merit list by arranging student marks in ascending order. Write a C++ program to implement Bubble Sort or Insertion Sort to sort the marks and display the sorted list. 
+CODE:
+#include <iostream>
+using namespace std;
+
+int main() {
+    int marks[] = {85, 92, 78, 64, 89, 73, 95, 81};
+    int size = sizeof(marks) / sizeof(marks[0]);
+
+    cout << "Original Student Marks: ";
+    for (int i = 0; i < size; i++) {
+        cout << marks[i] << " ";
+    }
+    cout << "\n\n";
+
+    // Bubble Sort Algorithm
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = 0; j < size - i - 1; j++) {
+            if (marks[j] > marks[j + 1]) {
+                // Swap the marks
+                int temp = marks[j];
+                marks[j] = marks[j + 1];
+                marks[j + 1] = temp;
+            }
+        }
+    }
+
+    cout << "Sorted Merit List (Ascending Order): ";
+    for (int i = 0; i < size; i++) {
+        cout << marks[i] << " ";
+    }
+    cout << "\n";
+
+    return 0;
+}
+
+OUTPUT:
+Original Student Marks: 85 92 78 64 89 73 95 81 
+
+Sorted Merit List (Ascending Order): 64 73 78 81 85 89 92 95
+
+ CODE:
+/* 
+Name: Rishi Gupta
+SY BTech, Branch: AI & DS
+Roll No: 5045
+Lab Assignment 3: An e-commerce platform stores product IDs in an array. Write a C++ program to implement Linear Search to check whether a given product ID exists and display its position in the list.
+*/
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int productIDs[] = {1054, 2098, 3045, 4123, 5089, 6012, 7034};
+    int size = sizeof(productIDs) / sizeof(productIDs[0]);
+    int target;
+    bool found = false;
+    int position = -1;
+
+    cout << "Available Product IDs: ";
+    for (int i = 0; i < size; i++) {
+        cout << productIDs[i] << " ";
+    }
+    cout << "\n\nEnter Product ID to search: ";
+    cin >> target;
+
+    for (int i = 0; i < size; i++) {
+        if (productIDs[i] == target) {
+            found = true;
+            position = i;
+            break; 
+        }
+    }
+
+    if (found) {
+        cout << "\nStatus: Product ID " << target << " found at index " << position << ".\n";
+    } else {
+        cout << "\nStatus: Product ID " << target << " was not found in the list.\n";
+    }
+
+    return 0;
+}
+
+
+
+OUTPUT:
+Available Product IDs: 1054 2098 3045 4123 5089 6012 7034 
+
+Enter Product ID to search: 2098
+
+Status: Product ID 2098 found at index 1.
+
+Available Product IDs: 1054 2098 3045 4123 5089 6012 7034 
+
+Enter Product ID to search: 5065
+
+Status: Product ID 5065 was not found in the list.
+
+ Name: Rishi J. Gupta
+LDS - Lab Assignment 4 
+A railway reservation system maintains a queue for passengers on the waiting list. Write a C++ program to implement a queue using arrays to simulate passenger arrival (enqueue) and passenger service (dequeue).
+1.	Code:
+#include <iostream>
+using namespace std;
+
+class RailwayQueue {
+    int front, rear;
+    int maxSize;
+    int passengers[100]; 
+
+public:
+    RailwayQueue() {
+        front = -1;
+        rear = -1;
+        maxSize = 100;
+    }
+
+    bool isFull() {
+        return (rear == maxSize - 1);
+    }
+
+    bool isEmpty() {
+        return (front == -1 || front > rear);
+    }
+
+    void enqueue(int passenger_id) {
+        if (isFull()) {
+            cout << "Waiting list is full (Queue Overflow).\n";
+            return;
+        }
+        if (front == -1) {
+            front = 0;
+        }
+        rear++;
+        passengers[rear] = passenger_id;
+        cout << "Passenger " << passenger_id << " added to the waiting list.\n";
+    }
+
+    void dequeue() {
+        if (isEmpty()) {
+            cout << "No passengers in the waiting list (Queue Underflow).\n";
+            return;
+        }
+        cout << "Passenger " << passengers[front] << " has been served.\n";
+        front++;
+    }
+
+    void display() {
+        if (isEmpty()) {
+            cout << "Waiting list is currently empty.\n";
+            return;
+        }
+        cout << "Current Waiting List (Passenger IDs): ";
+        for (int i = front; i <= rear; i++) {
+            cout << passengers[i] << " ";
+        }
+        cout << "\n";
+    }
+};
+
+int main() {
+    RailwayQueue rq;
+    int choice, id;
+
+    do {
+        cout << "\n1. Enqueue Passenger\n";
+        cout << "2. Dequeue Passenger\n";
+        cout << "3. Display List\n";
+        cout << "4. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter Passenger ID: ";
+                cin >> id;
+                rq.enqueue(id);
+                break;
+            case 2:
+                rq.dequeue();
+                break;
+            case 3:
+                rq.display();
+                break;
+            case 4:
+                cout << "Exiting system.\n";
+                break;
+            default:
+                cout << "Invalid choice.\n";
+        }
+    } while (choice != 4);
+
+    return 0;
+}
+
+
+
+
+2.	Output:
+1. Enqueue Passenger
+2. Dequeue Passenger
+3. Display List
+4. Exit
+Enter your choice: 1
+Enter Passenger ID: 503
+Passenger 503 added to the waiting list.
+
+1. Enqueue Passenger
+2. Dequeue Passenger
+3. Display List
+4. Exit
+Enter your choice: 1
+Enter Passenger ID: 504
+Passenger 504 added to the waiting list.
+
+1. Enqueue Passenger
+2. Dequeue Passenger
+3. Display List
+4. Exit
+Enter your choice: 3
+Current Waiting List (Passenger IDs): 503 504 
+
+1. Enqueue Passenger
+2. Dequeue Passenger
+3. Display List
+4. Exit
+Enter your choice: 4
+Exiting system.
+
+
+
+
+ Name: Rishi J. Gupta 
+LDS Lab Assignment 5
+Customers arriving at a bank counter are served in FIFO order. Write a C++ program to implement a queue data structure that manages customer service operations such as adding customers and serving them. 
+1.	Code:
+#include <iostream>
+using namespace std;
+
+class BankQueue {
+    int front, rear;
+    int maxSize;
+    int customers[100];
+
+public:
+    BankQueue() {
+        front = -1;
+        rear = -1;
+        maxSize = 100;
+    }
+
+    bool isFull() {
+        return (rear == maxSize - 1);
+    }
+
+    bool isEmpty() {
+        return (front == -1 || front > rear);
+    }
+
+    void enqueue(int customer_id) {
+        if (isFull()) {
+            cout << "Bank queue is full.\n";
+            return;
+        }
+        if (front == -1) {
+            front = 0;
+        }
+        rear++;
+        customers[rear] = customer_id;
+        cout << "Customer " << customer_id << " joined the queue.\n";
+    }
+
+    void dequeue() {
+        if (isEmpty()) {
+            cout << "No customers waiting to be served.\n";
+            return;
+        }
+        cout << "Customer " << customers[front] << " has been served.\n";
+        front++;
+    }
+
+    void display() {
+        if (isEmpty()) {
+            cout << "Queue is currently empty.\n";
+            return;
+        }
+        cout << "Waiting Customers (IDs): ";
+        for (int i = front; i <= rear; i++) {
+            cout << customers[i] << " ";
+        }
+        cout << "\n";
+    }
+};
+
+int main() {
+    BankQueue bq;
+    int choice, id;
+
+    do {
+        cout << "\n1. Add Customer\n";
+        cout << "2. Serve Customer\n";
+        cout << "3. Display Queue\n";
+        cout << "4. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter Customer ID: ";
+                cin >> id;
+                bq.enqueue(id);
+                break;
+            case 2:
+                bq.dequeue();
+                break;
+            case 3:
+                bq.display();
+                break;
+            case 4:
+                cout << "Exiting system.\n";
+                break;
+            default:
+                cout << "Invalid choice.\n";
+        }
+    } while (choice != 4);
+
+    return 0;
+}   
+
+
+
+
+
+Output:
+
+1. Add Customer
+2. Serve Customer
+3. Display Queue
+4. Exit
+Enter your choice: 1
+Enter Customer ID: 64
+Customer 64 joined the queue.
+
+1. Add Customer
+2. Serve Customer
+3. Display Queue
+4. Exit
+Enter your choice: 2
+Customer 64 has been served.
+
+1. Add Customer
+2. Serve Customer
+3. Display Queue
+4. Exit
+Enter your choice: 3
+Queue is currently empty.
+
+1. Add Customer
+2. Serve Customer
+3. Display Queue
+4. Exit
+Enter your choice: 4
+Exiting system.
+
+ /* 
+Name: Rishi Gupta
+SY BTech, Branch: AI & DS
+Roll No: 5045
+Lab Assignment 6: A text editor allows users to undo their most recent actions. Write a C++ program to implement a stack using arrays to store recent operations and simulate the undo functionality using push and pop operations.
+*/
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+#define MAX 100
+
+class UndoStack {
+private:
+    string actions[MAX];
+    int top;
+
+public:
+    UndoStack() {
+        top = -1;
+    }
+
+    void push(string action) {
+        if (top >= MAX - 1) {
+            cout << "Stack Overflow. Cannot store more actions.\n";
+        } else {
+            top++;
+            actions[top] = action;
+            cout << "Action Performed: " << action << "\n";
+        }
+    }
+
+    void pop() {
+        if (top < 0) {
+            cout << "Stack Underflow. No actions to undo.\n";
+        } else {
+            cout << "Undo Performed: Reverted '" << actions[top] << "'\n";
+            top--;
+        }
+    }
+
+    void display() {
+        if (top < 0) {
+            cout << "No recent actions in history.\n";
+        } else {
+            cout << "Recent Actions (Most recent first):\n";
+            for (int i = top; i >= 0; i--) {
+                cout << "- " << actions[i] << "\n";
+            }
+        }
+        cout << "\n";
+    }
+};
+
+int main() {
+    UndoStack editor;
+
+    editor.push("Typed 'Hello'");
+    editor.push("Typed ' '");
+    editor.push("Typed 'World'");
+    
+    cout << "\n";
+    editor.display();
+
+    editor.pop();
+    
+    cout << "\n";
+    editor.display();
+
+    editor.pop();
+    editor.pop();
+    
+    cout << "\nTrying to undo again:\n";
+    editor.pop(); 
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+OUTPUT:
+Action Performed: Typed 'Hello'
+Action Performed: Typed ' '
+Action Performed: Typed 'World'
+
+Recent Actions (Most recent first):
+- Typed 'World'
+- Typed ' '
+- Typed 'Hello'
+
+Undo Performed: Reverted 'Typed 'World''
+
+Recent Actions (Most recent first):
+- Typed ' '
+- Typed 'Hello'
+
+Undo Performed: Reverted 'Typed ' ''
+Undo Performed: Reverted 'Typed 'Hello''
+
+Trying to undo again:
+Stack Underflow. No actions to undo.
+
+ /* 
+Name: Rishi Gupta
+SY BTech, Branch: AI & DS
+Roll No: 5045
+Lab Assignment 7: A compiler needs to verify whether parentheses in a mathematical expression are balanced. Write a C++ program using a stack to check whether the given expression has balanced parentheses.
+*/
+
+#include <iostream>
+#include <stack>
+#include <string>
+using namespace std;
+
+bool isBalanced(string expr) {
+    stack<char> s;
+
+    for (char ch : expr) {
+        if (ch == '(' || ch == '{' || ch == '[') {
+            s.push(ch);
+        } 
+        else if (ch == ')' || ch == '}' || ch == ']') {
+            if (s.empty()) {
+                return false;
+            }
+            char top = s.top();
+            if ((ch == ')' && top == '(') ||
+                (ch == '}' && top == '{') ||
+                (ch == ']' && top == '[')) {
+                s.pop();
+            } else {
+                return false;
+            }
+        }
+    }
+
+    return s.empty();
+}
+
+int main() {
+    string expression;
+
+    cout << "Enter a mathematical expression: ";
+    getline(cin, expression);
+
+    if (isBalanced(expression)) {
+        cout << "The expression has BALANCED parentheses.\n";
+    } else {
+        cout << "The expression has UNBALANCED parentheses.\n";
+    }
+
+    return 0;
+}
+
+
+OUTPUT:
+Enter a mathematical expression: {(a + b) * [c - d]}
+The expression has BALANCED parentheses.
+
+Enter a mathematical expression: (a + b] * {c - d)
+The expression has UNBALANCED parentheses.
+
+Enter a mathematical expression: ((a + b) * c
+The expression has UNBALANCED parentheses.
+
+Enter a mathematical expression: (a + b))
+The expression has UNBALANCED parentheses.
+
+ /* 
+Name: Rishi Gupta
+SY BTech, Branch: AI & DS
+Roll No: 5045
+Lab Assignment 8: A music application maintains a playlist where songs can be dynamically added or removed. Write a C++ program to implement a singly linked list to store songs and perform operations such as insert, delete, and display.
+*/
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct Song {
+    string title;
+    Song* next;
+};
+
+class Playlist {
+private:
+    Song* head;
+
+public:
+    Playlist() {
+        head = nullptr;
+    }
+
+    void insertSong(string songTitle) {
+        Song* newSong = new Song();
+        newSong->title = songTitle;
+        newSong->next = nullptr;
+
+        if (head == nullptr) {
+            head = newSong;
+        } else {
+            Song* temp = head;
+            while (temp->next != nullptr) {
+                temp = temp->next;
+            }
+            temp->next = newSong;
+        }
+        cout << "Added '" << songTitle << "' to the playlist.\n";
+    }
+
+    void deleteSong(string songTitle) {
+        if (head == nullptr) {
+            cout << "Playlist is empty. Nothing to delete.\n";
+            return;
+        }
+
+        if (head->title == songTitle) {
+            Song* temp = head;
+            head = head->next;
+            delete temp;
+            cout << "Removed '" << songTitle << "' from the playlist.\n";
+            return;
+        }
+
+        Song* current = head;
+        Song* previous = nullptr;
+
+        while (current != nullptr && current->title != songTitle) {
+            previous = current;
+            current = current->next;
+        }
+
+        if (current == nullptr) {
+            cout << "Song '" << songTitle << "' not found in the playlist.\n";
+            return;
+        }
+
+        previous->next = current->next;
+        delete current;
+        cout << "Removed '" << songTitle << "' from the playlist.\n";
+    }
+
+    void displayPlaylist() {
+        if (head == nullptr) {
+            cout << "Playlist is currently empty.\n";
+            return;
+        }
+
+        cout << "\n--- Current Playlist ---\n";
+        Song* temp = head;
+        int count = 1;
+        while (temp != nullptr) {
+            cout << count << ". " << temp->title << "\n";
+            temp = temp->next;
+            count++;
+        }
+        cout << "------------------------\n";
+    }
+};
+
+int main() {
+    Playlist myPlaylist;
+    int choice;
+    string songName;
+
+    do {
+        cout << "\nMusic Playlist Menu:\n";
+        cout << "1. Add a Song (Insert)\n";
+        cout << "2. Remove a Song (Delete)\n";
+        cout << "3. View Playlist (Display)\n";
+        cout << "4. Exit\n";
+        cout << "Enter your choice (1-4): ";
+        cin >> choice;
+        cin.ignore(); 
+
+        switch (choice) {
+            case 1:
+                cout << "Enter the name of the song to add: ";
+                getline(cin, songName);
+                myPlaylist.insertSong(songName);
+                break;
+            case 2:
+                cout << "Enter the name of the song to remove: ";
+                getline(cin, songName);
+                myPlaylist.deleteSong(songName);
+                break;
+            case 3:
+                myPlaylist.displayPlaylist();
+                break;
+            case 4:
+                cout << "Exiting Music Application...\n";
+                break;
+            default:
+                cout << "Invalid choice. Please try again.\n";
+        }
+    } while (choice != 4);
+
+    return 0;
+}
+
+
+OUTPUT:
+Music Playlist Menu:
+1. Add a Song (Insert)
+2. Remove a Song (Delete)
+3. View Playlist (Display)
+4. Exit
+Enter your choice (1-4): 1
+Enter the name of the song to add: starboy 
+Added 'starboy' to the playlist.
+
+Music Playlist Menu:
+1. Add a Song (Insert)
+2. Remove a Song (Delete)
+3. View Playlist (Display)
+4. Exit
+Enter your choice (1-4): 3
+
+--- Current Playlist ---
+1. starboy
+------------------------
+
+Music Playlist Menu:
+1. Add a Song (Insert)
+2. Remove a Song (Delete)
+3. View Playlist (Display)
+4. Exit
+Enter your choice (1-4): 2
+Enter the name of the song to remove: starboy
+Removed 'starboy' from the playlist.
+
+Music Playlist Menu:
+1. Add a Song (Insert)
+2. Remove a Song (Delete)
+3. View Playlist (Display)
+4. Exit
+Enter your choice (1-4): 3
+Playlist is currently empty.
+
+Music Playlist Menu:
+1. Add a Song (Insert)
+2. Remove a Song (Delete)
+3. View Playlist (Display)
+4. Exit
+Enter your choice (1-4): 4
+Exiting Music Application...
+
+ /* 
+Name: Rishi Gupta
+SY BTech, Branch: AI & DS
+Roll No: 5045
+Lab Assignment 9: A scientific calculator needs to perform addition of two polynomials entered by the user. Write a C++ program to represent polynomials using linked lists and perform polynomial addition.
+*/
+
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int coeff;
+    int power;
+    Node* next;
+};
+
+void insertTerm(Node*& head, int c, int p) {
+    if (c == 0) return; 
+
+    Node* newNode = new Node;
+    newNode->coeff = c;
+    newNode->power = p;
+    newNode->next = nullptr;
+
+    if (head == nullptr || p > head->power) {
+        newNode->next = head;
+        head = newNode;
+    } 
+    else if (p == head->power) {
+        head->coeff += c;
+        delete newNode;
+    } 
+    else {
+        Node* temp = head;
+        while (temp->next != nullptr && temp->next->power >= p) {
+            if (temp->next->power == p) {
+                temp->next->coeff += c;
+                delete newNode;
+                return;
+            }
+            temp = temp->next;
+        }
+        newNode->next = temp->next;
+        temp->next = newNode;
+    }
+}
+
+void createPolynomial(Node*& head) {
+    int n, c, p;
+    cout << "Enter the number of terms: ";
+    cin >> n;
+    
+    for (int i = 0; i < n; i++) {
+        cout << "Term " << i + 1 << " - Enter coefficient: ";
+        cin >> c;
+        cout << "Term " << i + 1 << " - Enter power: ";
+        cin >> p;
+        insertTerm(head, c, p);
+    }
+}
+
+Node* addPolynomials(Node* p1, Node* p2) {
+    Node* result = nullptr;
+    
+    while (p1 != nullptr) {
+        insertTerm(result, p1->coeff, p1->power);
+        p1 = p1->next;
+    }
+    
+    while (p2 != nullptr) {
+        insertTerm(result, p2->coeff, p2->power);
+        p2 = p2->next;
+    }
+    
+    return result;
+}
+
+void displayPolynomial(Node* head) {
+    if (head == nullptr) {
+        cout << "0\n";
+        return;
+    }
+    
+    Node* temp = head;
+    while (temp != nullptr) {
+        cout << temp->coeff << "x^" << temp->power;
+        if (temp->next != nullptr) {
+            if (temp->next->coeff > 0) {
+                cout << " + "; 
+            } else if (temp->next->coeff < 0) {
+                cout << " "; 
+            }
+        }
+        temp = temp->next;
+    }
+    cout << "\n";
+}
+
+int main() {
+    Node* poly1 = nullptr;
+    Node* poly2 = nullptr;
+    Node* sum = nullptr;
+
+    cout << "--- Enter First Polynomial ---\n";
+    createPolynomial(poly1);
+
+    cout << "\n--- Enter Second Polynomial ---\n";
+    createPolynomial(poly2);
+
+    cout << "\n--------------------------------\n";
+    cout << "First Polynomial : ";
+    displayPolynomial(poly1);
+
+    cout << "Second Polynomial: ";
+    displayPolynomial(poly2);
+
+    sum = addPolynomials(poly1, poly2);
+
+    cout << "Resulting Sum    : ";
+    displayPolynomial(sum);
+    cout << "--------------------------------\n";
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+OUTPUT:
+--- Enter First Polynomial ---
+Enter the number of terms: 3
+Term 1 - Enter coefficient: 2
+Term 1 - Enter power: 2
+Term 2 - Enter coefficient: 2
+Term 2 - Enter power: 1
+Term 3 - Enter coefficient: 3
+Term 3 - Enter power: 0
+
+--- Enter Second Polynomial ---
+Enter the number of terms: 3
+Term 1 - Enter coefficient: 3
+Term 1 - Enter power: 1
+Term 2 - Enter coefficient: 2
+Term 2 - Enter power: 2
+Term 3 - Enter coefficient: 4
+Term 3 - Enter power: 0
+
+--------------------------------
+First Polynomial : 2x^2 + 2x^1 + 3x^0
+Second Polynomial: 2x^2 + 3x^1 + 4x^0
+Resulting Sum    : 4x^2 + 5x^1 + 7x^0
+
+
+ /* 
+Name: Rishi Gupta
+SY BTech, Branch: AI & DS
+Roll No: 5045
+Lab Assignment 10: A printer processes tasks based on priority levels where urgent tasks are handled first. Write a C++ program to implement a priority queue to manage print jobs according to their priority.
+*/
+
+#include <iostream>
+#include <string>
+#include <limits>
+using namespace std;
+
+struct PrintJob {
+    string documentName;
+    int priority;
+    PrintJob* next;
+};
+
+class PrinterQueue {
+private:
+    PrintJob* head;
+
+public:
+    PrinterQueue() {
+        head = nullptr;
+    }
+
+    void addJob(string docName, int prio) {
+        PrintJob* newJob = new PrintJob();
+        newJob->documentName = docName;
+        newJob->priority = prio;
+        newJob->next = nullptr;
+
+        if (head == nullptr || prio > head->priority) {
+            newJob->next = head;
+            head = newJob;
+        } else {
+            PrintJob* temp = head;
+            while (temp->next != nullptr && temp->next->priority >= prio) {
+                temp = temp->next;
+            }
+            newJob->next = temp->next;
+            temp->next = newJob;
+        }
+        cout << "Added '" << docName << "' with priority " << prio << ".\n";
+    }
+
+    void processJob() {
+        if (head == nullptr) {
+            cout << "No print jobs in the queue.\n";
+            return;
+        }
+
+        PrintJob* temp = head;
+        cout << "Printing: " << temp->documentName << " (Priority: " << temp->priority << ")\n";
+        head = head->next;
+        delete temp;
+    }
+
+    void displayQueue() {
+        if (head == nullptr) {
+            cout << "Printer queue is empty.\n";
+            return;
+        }
+
+        cout << "\n--- Pending Print Jobs ---\n";
+        PrintJob* temp = head;
+        int count = 1;
+        while (temp != nullptr) {
+            cout << count << ". " << temp->documentName << " (Priority: " << temp->priority << ")\n";
+            temp = temp->next;
+            count++;
+        }
+        cout << "--------------------------\n";
+    }
+};
+
+int main() {
+    PrinterQueue printer;
+    int choice = 0, priority;
+    string docName;
+
+    do {
+        cout << "\nPrinter Priority Queue Menu:\n";
+        cout << "1. Add Print Job\n";
+        cout << "2. Process Next Print Job\n";
+        cout << "3. Display Pending Jobs\n";
+        cout << "4. Exit\n";
+        cout << "Enter your choice (1-4): ";
+
+        if (!(cin >> choice)) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid input. Please enter a number between 1 and 4.\n";
+            continue;
+        }
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        switch (choice) {
+            case 1:
+                cout << "Enter document name: ";
+                getline(cin, docName);
+                cout << "Enter priority (Higher number = More urgent): ";
+                while (!(cin >> priority)) {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Invalid priority. Please enter a number: ";
+                }
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                printer.addJob(docName, priority);
+                break;
+            case 2:
+                printer.processJob();
+                break;
+            case 3:
+                printer.displayQueue();
+                break;
+            case 4:
+                cout << "Exiting Printer Queue...\n";
+                break;
+            default:
+                cout << "Invalid choice. Please try again.\n";
+        }
+    } while (choice != 4);
+
+    return 0;
+}
+
+
+
+
+
+
+OUTPUT:
+Printer Priority Queue Menu:
+1. Add Print Job
+2. Process Next Print Job
+3. Display Pending Jobs
+4. Exit
+Enter your choice (1-4): 12
+Invalid choice. Please try again.
+
+Printer Priority Queue Menu:
+1. Add Print Job
+2. Process Next Print Job
+3. Display Pending Jobs
+4. Exit
+Enter your choice (1-4): a
+Invalid input. Please enter a number between 1 and 4.
+
+Printer Priority Queue Menu:
+1. Add Print Job
+2. Process Next Print Job
+3. Display Pending Jobs
+4. Exit
+Enter your choice (1-4): 1
+Enter document name: purchase order
+Enter priority (Higher number = More urgent): 5
+Added 'purchase order' with priority 5.
+
+Printer Priority Queue Menu:
+1. Add Print Job
+2. Process Next Print Job
+3. Display Pending Jobs
+4. Exit
+Enter your choice (1-4): 1
+Enter document name: letter 3
+Enter priority (Higher number = More urgent): 3
+Added 'letter 3' with priority 3.
+
+Printer Priority Queue Menu:
+1. Add Print Job
+2. Process Next Print Job
+3. Display Pending Jobs
+4. Exit
+Enter your choice (1-4): 3
+
+--- Pending Print Jobs ---
+1. purchase order (Priority: 5)
+2. letter 3 (Priority: 3)
+--------------------------
+
+Printer Priority Queue Menu:
+1. Add Print Job
+2. Process Next Print Job
+3. Display Pending Jobs
+4. Exit
+Enter your choice (1-4): signature
+Invalid input. Please enter a number between 1 and 4.
+
+Printer Priority Queue Menu:
+1. Add Print Job
+2. Process Next Print Job
+3. Display Pending Jobs
+4. Exit
+Enter your choice (1-4): 1
+Enter document name: signature
+Enter priority (Higher number = More urgent): 7
+Added 'signature' with priority 7.
+
+Printer Priority Queue Menu:
+1. Add Print Job
+2. Process Next Print Job
+3. Display Pending Jobs
+4. Exit
+Enter your choice (1-4): 3
+
+--- Pending Print Jobs ---
+1. signature (Priority: 7)
+2. purchase order (Priority: 5)
+3. letter 3 (Priority: 3)
+--------------------------
+
+Printer Priority Queue Menu:
+1. Add Print Job
+2. Process Next Print Job
+3. Display Pending Jobs
+4. Exit
+Enter your choice (1-4): 2
+Printing: signature (Priority: 7)
+
+Printer Priority Queue Menu:
+1. Add Print Job
+2. Process Next Print Job
+3. Display Pending Jobs
+4. Exit
+Enter your choice (1-4): 2
+Printing: purchase order (Priority: 5)
+
+Printer Priority Queue Menu:
+1. Add Print Job
+2. Process Next Print Job
+3. Display Pending Jobs
+4. Exit
+Enter your choice (1-4): 2
+Printing: letter 3 (Priority: 3)
+
+Printer Priority Queue Menu:
+1. Add Print Job
+2. Process Next Print Job
+3. Display Pending Jobs
+4. Exit
+Enter your choice (1-4): 2
+No print jobs in the queue.
+
+Printer Priority Queue Menu:
+1. Add Print Job
+2. Process Next Print Job
+3. Display Pending Jobs
+4. Exit
+Enter your choice (1-4): 4
+Exiting Printer Queue...
